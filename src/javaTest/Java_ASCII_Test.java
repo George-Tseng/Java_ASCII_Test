@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Java_ASCII_Test {
 	public static void main(String[] args) {
 
+		Scanner inputScan = new Scanner(System.in);
+		
 		String myTime = Get_Date.getDateNow();
 		System.out.println("現在時間為："+myTime);
 		String myMacAddress = Get_Mac_Address.getMacAddress().equals("") ? "NotFound" : Get_Mac_Address.getMacAddress();
@@ -22,7 +24,6 @@ public class Java_ASCII_Test {
 
 		while(true) {
 			System.out.println("請輸入密文(限英文):");
-			Scanner inputScan = new Scanner(System.in);
 			String inputKey = inputScan.nextLine();
 
 			String result = Get_Key.getEncodeKey(encodeTime, encodeMacAddress, inputKey);
@@ -30,6 +31,16 @@ public class Java_ASCII_Test {
 
 			String recoveryKey = Get_Key.getDecodeKey(encodeTime, encodeMacAddress, result);
 			System.out.println("還原結果為：" + recoveryKey);
+			
+			System.out.println("\n如要結束程式，請輸入「Exit」:");
+			String exitKey = inputScan.nextLine();
+			
+			if(exitKey.toUpperCase().equals("EXIT")) {
+				System.out.println("程式已結束...");
+				break;
+			}
 		}
+		
+		inputScan.close();
 	}
 }

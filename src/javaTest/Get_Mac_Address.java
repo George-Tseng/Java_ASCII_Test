@@ -20,24 +20,24 @@ public class Get_Mac_Address {
 
             /*用getByInetAddress()找出跟本地IP有關的資訊*/
             NetworkInterface myNetIF = NetworkInterface.getByInetAddress(myIP);
-            /*取出實體位址(Mac Address)，並存入陣列中*/
+            /*取出實體位址(macAddress)，並存入陣列中*/
             byte[] myMacAddress = myNetIF.getHardwareAddress();
             /*生成StringBuilder物件*/
             StringBuilder sb0 = new StringBuilder();
-            /*用迴圈讓StringBuilder裝填完Mac Address*/
+            /*用迴圈讓StringBuilder裝填完macAddress*/
             for (int i = 0; i < myMacAddress.length; i++) {
                 sb0.append(String.format(("%02X%s"), myMacAddress[i], (i < myMacAddress.length - 1) ? "-" : ""));
             }
             /*用toString()方法讓StringBuilder轉回String*/
             resultMacString =  sb0.toString();
         } catch (UnknownHostException e) {
-
+        	return "";
         } catch (SocketException e) {
-
+        	return "";
         } catch(Exception e) {
-
-        } finally{
-            return resultMacString;
-        }
+        	return "";
+        } 
+        return resultMacString;
+        
     }
 }
