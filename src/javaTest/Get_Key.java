@@ -1,8 +1,14 @@
 package javaTest;
 
+import java.text.ParseException;
+
 public class Get_Key {
 
-    public static String getEncodeKey(String inputTime, String inputMacAddress, String inputKey){
+    protected static String getEncodeKey(String inputTime, String inputMacAddress, String inputKey) throws ParseException {
+        /*計時用*/
+        String timeStart = Get_Date.getDateNow();
+        String timeEnd;
+
         /*用split拆裝String*/
         String [] timeSpace = inputTime.split(",");
         String [] macAddressSpace = inputMacAddress.split(",");
@@ -52,10 +58,16 @@ public class Get_Key {
                 sb0.append(",");
             }
         }
+        timeEnd = Get_Date.getDateNow();
+        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
 
         return sb0.toString();
     }
-    public static String getDecodeKey(String inputTime, String inputMacAddress, String inputText){
+    protected static String getDecodeKey(String inputTime, String inputMacAddress, String inputText) throws ParseException {
+        /*計時用*/
+        String timeStart = Get_Date.getDateNow();
+        String timeEnd;
+
         /*用split拆裝String*/
         String [] timeSpace = inputTime.split(",");
         String [] macAddressSpace = inputMacAddress.split(",");
@@ -102,11 +114,17 @@ public class Get_Key {
             paraKey = (byte)((paraResult * 128 + paraRest) - (paraTime * paraT + paraMacAddress * paraM));
             sb0.append(ASCII_Translator.getChar(paraKey));
         }
+        timeEnd = Get_Date.getDateNow();
+        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
 
         return sb0.toString();
     }
 
-    public static String getEncodeKeyMid(String inputTime, String inputMacAddress, String inputKey){
+    protected static String getEncodeKeyMid(String inputTime, String inputMacAddress, String inputKey) throws ParseException {
+        /*計時用*/
+        String timeStart = Get_Date.getDateNow();
+        String timeEnd;
+
         /*用split拆裝String*/
         String [] timeSpace = inputTime.split(",");
         String [] macAddressSpace = inputMacAddress.split(",");
@@ -144,10 +162,11 @@ public class Get_Key {
                 paraM = Integer.parseInt(macAddressSpace[i % paraMacAddress + 1]);
             }
 
+            long paraTmp = (long)(Math.pow((paraMacAddress * paraM), 2) - Math.pow(paraInput, 2));
             paraTotalUp = (long)((2 * (paraTime * paraT) * Math.pow((paraMacAddress * paraM), 2) * paraInput)
-                    + (2 * paraInput + 1) * (paraTime * paraT) * (Math.pow((paraMacAddress * paraM), 2) - Math.pow(paraInput, 2))
-                    + (Math.pow(paraInput, 2) * (paraTime * paraT) * (Math.pow((paraMacAddress * paraM), 2) - Math.pow(paraInput, 2))));
-            paraTotalDown = (long) (paraMacAddress * paraM * paraInput * ((Math.pow((paraMacAddress * paraM), 2)) - Math.pow(paraInput, 2)));
+                    + (2 * paraInput + 1) * (paraTime * paraT) * paraTmp
+                    + (Math.pow(paraInput, 2) * (paraTime * paraT) * paraTmp));
+            paraTotalDown = paraMacAddress * paraM * paraInput * (paraTmp);
 
             paraResult = paraTotalUp / paraTotalDown;
             paraRest = paraTotalUp % paraTotalDown + paraResult;
@@ -159,11 +178,17 @@ public class Get_Key {
                 sb0.append(",");
             }
         }
+        timeEnd = Get_Date.getDateNow();
+        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
 
         return sb0.toString();
     }
 
-    public static String getDecodeKeyMid(String inputTime, String inputMacAddress, String inputText){
+    protected static String getDecodeKeyMid(String inputTime, String inputMacAddress, String inputText) throws ParseException {
+        /*計時用*/
+        String timeStart = Get_Date.getDateNow();
+        String timeEnd;
+
         /*用split拆裝String*/
         String [] timeSpace = inputTime.split(",");
         String [] macAddressSpace = inputMacAddress.split(",");
@@ -202,11 +227,12 @@ public class Get_Key {
             paraResult = Long.parseLong(keySpace[0]);
             paraRest = Long.valueOf(keySpace[1], 16) - paraResult;
 
-            for(byte j = 0; j < 128; j++){
+            for(int j = 0; j < 128; j++){
+                long paraTmp = (long)(Math.pow((paraMacAddress * paraM), 2) - Math.pow(j, 2));
                 paraTotalUp = (long)((2 * (paraTime * paraT) * Math.pow((paraMacAddress * paraM), 2) * j)
-                        + (2 * j + 1) * (paraTime * paraT) * (Math.pow((paraMacAddress * paraM), 2) - Math.pow(j, 2))
-                        + (Math.pow(j, 2) * (paraTime * paraT) * (Math.pow((paraMacAddress * paraM), 2) - Math.pow(j, 2))));
-                paraTotalDown = (long) (paraMacAddress * paraM * j * ((Math.pow((paraMacAddress * paraM), 2)) - Math.pow(j, 2)));
+                        + (2 * j + 1) * (paraTime * paraT) * paraTmp
+                        + (Math.pow(j, 2) * (paraTime * paraT) * paraTmp));
+                paraTotalDown = paraMacAddress * paraM * j * (paraTmp);
 
                 if(paraTotalDown != 0){
                     if((paraResult == paraTotalUp / paraTotalDown) && (paraRest == paraTotalUp % paraTotalDown)){
@@ -216,6 +242,8 @@ public class Get_Key {
                 }
             }
         }
+        timeEnd = Get_Date.getDateNow();
+        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
 
         return sb0.toString();
     }

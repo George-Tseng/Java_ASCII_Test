@@ -2,21 +2,19 @@ package javaTest;
 
 public class ASCII_Translator {
 
-    public static byte getASCII(char inputChar){
-        byte resultNum = (byte)inputChar;
-        return resultNum;
+    protected static int getASCII(char inputChar){
+        return inputChar;
     }
 
-    public static char getChar(byte inputByte){
-        char resultChar = (char)inputByte;
-        return resultChar;
+    public static char getChar(int inputByte){
+        return (char)inputByte;
     }
 
-    public static String getMessageASCII(String inputParas){
+    protected static String getMessageASCII(String inputParas){
         /*用toCharArray方法把匯入的String拆成Char陣列*/
         char [] parasSpace = inputParas.toCharArray();
         /*根據Char陣列的大小生成對應用來裝ASCII的陣列*/
-        byte [] parasEncode = new byte[parasSpace.length];
+        int [] parasEncode = new int[parasSpace.length];
         /*生成StringBuilder物件*/
         StringBuilder sb0 = new StringBuilder();
         /*先存入整個String的長度在最前頭*/
@@ -35,7 +33,7 @@ public class ASCII_Translator {
         return sb0.toString();
     }
 
-    public static String getMessageChar(String inputParas){
+    protected static String getMessageChar(String inputParas){
         /*用split拆裝String*/
         String [] parasSpace = inputParas.split(",");
         /*先解開陣列的第一項，作為實際字串的長度*/
