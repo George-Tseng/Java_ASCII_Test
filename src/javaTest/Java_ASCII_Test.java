@@ -29,8 +29,14 @@ public class Java_ASCII_Test {
 			String result = Get_Key.getEncodeKey(encodeTime, encodeMacAddress, inputKey);
 			System.out.println("轉換結果為：" + result);
 
+			String resultMid = Get_Key.getEncodeKeyMid(encodeTime, encodeMacAddress, inputKey);
+			System.out.println("轉換結果為：" + resultMid);
+
 			String recoveryKey = Get_Key.getDecodeKey(encodeTime, encodeMacAddress, result);
 			System.out.println("還原結果為：" + recoveryKey);
+
+			String recoveryKeyMid = Get_Key.getDecodeKeyMid(encodeTime, encodeMacAddress, resultMid);
+			System.out.println("還原結果為：" + recoveryKeyMid);
 			
 			System.out.println("\n如要結束程式，請輸入「Exit」:");
 			String exitKey = inputScan.nextLine();
