@@ -184,6 +184,32 @@ public class File_Conf {
         return result;
     }
 
+    /*讀取結果檔*/
+    protected static String readResultFile(){
+        FileInputStream fis0;
+        InputStreamReader isr0;
+        int count;
+        String result = "";
+
+        try{
+            fis0 = new FileInputStream(resultF);
+            isr0 = new InputStreamReader(fis0, StandardCharsets.UTF_8);
+            StringBuilder sb0 = new StringBuilder();
+
+            while((count = isr0.read()) != -1){
+                char inputChar = (char)count;
+                sb0.append(inputChar);
+            }
+
+            result = sb0.toString();
+            fis0.close();
+            isr0.close();
+        } catch(IOException IOE){
+            System.out.println(IOE.getMessage());
+        }
+        return result;
+    }
+
     /*確認設定檔是否存在*/
     protected static boolean checkConfFile(){
         return confF.exists();

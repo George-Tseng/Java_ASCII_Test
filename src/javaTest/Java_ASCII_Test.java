@@ -90,7 +90,7 @@ public class Java_ASCII_Test {
 								}
 								else{
 									/*顯示結果*/
-									displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+									displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 								}
 							}
 						}
@@ -174,7 +174,7 @@ public class Java_ASCII_Test {
 							}
 							else{
 								/*顯示結果*/
-								displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+								displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 							}
 						}
 						else {
@@ -264,7 +264,7 @@ public class Java_ASCII_Test {
 							}
 							else{
 								/*顯示結果*/
-								displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+								displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 							}
 						}
 						else {
@@ -361,7 +361,7 @@ public class Java_ASCII_Test {
 							}
 							else{
 								/*顯示結果*/
-								displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+								displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 							}
 						}
 						else {
@@ -460,7 +460,7 @@ public class Java_ASCII_Test {
 								}
 								else{
 									/*顯示結果*/
-									displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+									displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 								}
 							}
 						} else {
@@ -541,7 +541,7 @@ public class Java_ASCII_Test {
 							}
 							else{
 								/*顯示結果*/
-								displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+								displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 							}
 						} else {
 							System.out.println("出現預期外的錯誤...，程式無法繼續執行");
@@ -628,7 +628,7 @@ public class Java_ASCII_Test {
 							}
 							else{
 								/*顯示結果*/
-								displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+								displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 							}
 						} else {
 							System.out.println("出現預期外的錯誤...，程式無法繼續執行");
@@ -712,7 +712,7 @@ public class Java_ASCII_Test {
 							}
 							else{
 								/*顯示結果*/
-								displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
+								displayResult(myTime, inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 							}
 						} else {
 							System.out.println("出現預期外的錯誤...，程式無法繼續執行");
@@ -735,7 +735,7 @@ public class Java_ASCII_Test {
 	}
 
 	/*顯示結果*/
-	private static void displayResult(String inputKey, String encodeTime, String encodeMacAddress, String decodeTime, String decodeMacAddress){
+	private static void displayResult(String myTime, String inputKey, String encodeTime, String encodeMacAddress, String decodeTime, String decodeMacAddress){
 		String resultTmp = Get_Key.getEncodeKey(encodeTime, encodeMacAddress, inputKey);
 		String result = (!resultTmp.equals("")) ? resultTmp : "執行失敗";
 		System.out.println("方法一轉換結果為：" + result);
@@ -760,7 +760,7 @@ public class Java_ASCII_Test {
 		String recoveryKeyLong = (!recoveryKeyLongTmp.equals("")) ? recoveryKeyLongTmp : "執行失敗";
 		System.out.println("方法三還原結果為：" + recoveryKeyLong);
 
-		String totalResult = inputKey + "\n" + result + "\n" + recoveryKey + "\n" + resultMid + "\n" + recoveryKeyMid + "\n" + resultLong + "\n" + recoveryKeyLong;
+		String totalResult = myTime + "\n" + inputKey + "\n" + result + "\n" + recoveryKey + "\n" + resultMid + "\n" + recoveryKeyMid + "\n" + resultLong + "\n" + recoveryKeyLong;
 
 		/*確認輸出檔是否存在*/
 		if(!File_Conf.CheckResultFile()){
@@ -780,6 +780,20 @@ public class Java_ASCII_Test {
 				}
 			}
 		}
+		/*原有的輸出檔有內容*/
+		else if(!File_Conf.readResultFile().equals("")){
+			/*嘗試寫入輸出檔*/
+			String oldResult = File_Conf.readResultFile();
+			String newResult = oldResult + "\n" + totalResult;
+			if(!File_Conf.writeResultFile(newResult).equals("")){
+				System.out.println("輸出檔寫入失敗...\n錯誤資訊為：");
+				System.out.println(File_Conf.writeResultFile(newResult));
+			}
+			else{
+				System.out.println("輸出檔案成功!");
+			}
+		}
+		/*無內容*/
 		else{
 			/*嘗試寫入輸出檔*/
 			if(!File_Conf.writeResultFile(totalResult).equals("")){
