@@ -5,15 +5,15 @@ import java.nio.charset.StandardCharsets;
 
 public class File_Conf {
     /*固定設定檔、暫存檔等的路徑*/
-    private final static File logF = new File("appLog.csv");
+    private final static File confF = new File("appConf.csv");
     private final static File tmpF = new File("appTmp.csv");
-    //private final static File paraF = new File("appPara.csv");
+    private final static File resultF = new File("appResult.txt");
 
     /*建立設定檔*/
-    protected static String createLogFile(){
+    protected static String createConfFile(){
         String status = "";
         try{
-            if(!logF.createNewFile()){
+            if(!confF.createNewFile()){
                 status = "建立失敗";
             }
         } catch(IOException IOE){
@@ -22,14 +22,14 @@ public class File_Conf {
         return status;
     }
 
-    /*寫入設定值*/
-    protected static String writeLogFile(String timeNow){
+    /*寫入設定檔*/
+    protected static String writeConfFile(String timeNow){
         FileOutputStream fos0;
         OutputStreamWriter osw0;
         String result = "";
 
         try{
-            fos0 = new FileOutputStream(logF);
+            fos0 = new FileOutputStream(confF);
             osw0 = new OutputStreamWriter(fos0, StandardCharsets.UTF_8);
 
             osw0.write(timeNow);
@@ -43,14 +43,14 @@ public class File_Conf {
     }
 
     /*讀取設定檔*/
-    protected static String readLogFile(){
+    protected static String readConfFile(){
         FileInputStream fis0;
         InputStreamReader isr0;
         int count;
         String result;
 
         try{
-            fis0 = new FileInputStream(logF);
+            fis0 = new FileInputStream(confF);
             isr0 = new InputStreamReader(fis0, StandardCharsets.UTF_8);
             StringBuilder sb0 = new StringBuilder();
 
@@ -63,7 +63,8 @@ public class File_Conf {
             fis0.close();
             isr0.close();
         } catch(IOException IOE){
-            result = IOE.getMessage();
+            System.out.println(IOE.getMessage());
+            result = "";
         }
         return result;
     }
@@ -151,13 +152,49 @@ public class File_Conf {
         return status;
     }
 
+    /*建立結果檔*/
+    protected static String createResultFile(){
+        String status = "";
+        try{
+            if(!resultF.createNewFile()){
+                status = "建立失敗";
+            }
+        } catch(IOException IOE){
+            status = IOE.getMessage();
+        }
+        return status;
+    }
+
+    /*寫入結果檔*/
+    protected static String writeResultFile(String timeNow){
+        FileOutputStream fos0;
+        OutputStreamWriter osw0;
+        String result = "";
+
+        try{
+            fos0 = new FileOutputStream(resultF);
+            osw0 = new OutputStreamWriter(fos0, StandardCharsets.UTF_8);
+
+            osw0.write(timeNow);
+            osw0.flush();
+            fos0.close();
+            osw0.close();
+        } catch(IOException IOE){
+            result = IOE.getMessage();
+        }
+        return result;
+    }
+
     /*確認設定檔是否存在*/
-    protected static boolean checkLogFile(){
-        return logF.exists();
+    protected static boolean checkConfFile(){
+        return confF.exists();
     }
 
     /*確認暫存檔是否存在*/
     protected static boolean checkTmpFile(){
         return tmpF.exists();
     }
+
+    /*確認結果檔是否存在*/
+    protected static boolean CheckResultFile() {return resultF.exists();}
 }
