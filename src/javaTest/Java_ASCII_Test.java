@@ -18,8 +18,8 @@ public class Java_ASCII_Test {
 			Scanner inputScan = new Scanner(System.in);
 
 			while(true) {
-				/*初始狀態-設定檔及暫存檔均不存在*/
-				if (!File_Conf.checkConfFile() && !File_Conf.checkTmpFile()) {
+				/*初始狀態-紀錄檔及暫存檔均不存在*/
+				if (!File_Conf.checkLogFile() && !File_Conf.checkTmpFile()) {
 					/*紀錄啟動時的時間*/
 					myTime = Get_Date.getDateNow();
 
@@ -29,25 +29,25 @@ public class Java_ASCII_Test {
 					suc2 = false;
 					suc3 = true;
 
-					/*嘗試建立設定檔*/
-					if(!File_Conf.createConfFile().equals("")){
-						System.out.println("設定檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+					/*嘗試建立紀錄檔*/
+					if(!File_Conf.createLogFile().equals("")){
+						System.out.println("紀錄檔建立失敗...\n錯誤資訊為：");
+						System.out.println(File_Conf.createLogFile());
 					}
 					/*成功才執行寫入方法*/
 					else{
-						if(File_Conf.writeConfFile(myTime).equals("")){
+						if(File_Conf.writeLogFile(myTime).equals("")){
 							suc1 = true;
 						}
 						else{
-							System.out.println(File_Conf.writeConfFile(myTime));
+							System.out.println(File_Conf.writeLogFile(myTime));
 						}
 					}
 
 					/*嘗試建立暫存檔*/
 					if(!File_Conf.createTmpFile().equals("")){
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else{
@@ -58,7 +58,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if(!File_Conf.deleteTmpFile().equals("")){
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createLogFile());
 						suc3 = false;
 					}
 
@@ -86,6 +86,7 @@ public class Java_ASCII_Test {
 								/*顯示結果*/
 								displayResult(inputKey, encodeTime, encodeMacAddress, decodeTime, decodeMacAddress);
 							}
+
 						}
 						else{
 							System.out.println("無法取得網卡資訊，請確認網路連線狀態正常後重開本程式...");
@@ -96,13 +97,13 @@ public class Java_ASCII_Test {
 					}
 				}
 				/*上次使用時按正常流程關閉*/
-				else if (File_Conf.checkConfFile() && !File_Conf.checkTmpFile()) {
+				else if (File_Conf.checkLogFile() && !File_Conf.checkTmpFile()) {
 					suc1 = false;
 					suc2 = false;
 					suc3 = true;
 
-					/*讀取設定檔中的所有紀錄*/
-					String allLastTime = File_Conf.readConfFile();
+					/*讀取紀錄檔中的所有紀錄*/
+					String allLastTime = File_Conf.readLogFile();
 					/*用換行拆分資料*/
 					String [] recordSpace = allLastTime.split("\n");
 					/*最後一筆為上次啟動時間*/
@@ -117,18 +118,18 @@ public class Java_ASCII_Test {
 					/*在原有紀錄中加入新的一筆*/
 					String allTime = allLastTime + "\n" + myTime;
 
-					/*將所有紀錄重新寫入設定檔*/
-					if(File_Conf.writeConfFile(allTime).equals("")){
+					/*將所有紀錄重新寫入紀錄檔*/
+					if(File_Conf.writeLogFile(allTime).equals("")){
 						suc1 = true;
 					}
 					else{
-						System.out.println(File_Conf.writeConfFile(allTime));
+						System.out.println(File_Conf.writeLogFile(allTime));
 					}
 
 					/*嘗試建立暫存檔*/
 					if(!File_Conf.createTmpFile().equals("")){
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else{
@@ -139,7 +140,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if(!File_Conf.deleteTmpFile().equals("")){
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc3 = false;
 					}
 
@@ -175,7 +176,7 @@ public class Java_ASCII_Test {
 					}
 				}
 				/*上次使用時未依正常流程關閉*/
-				else if (File_Conf.checkConfFile() && File_Conf.checkTmpFile()) {
+				else if (File_Conf.checkLogFile() && File_Conf.checkTmpFile()) {
 					suc1 = false;
 					suc2 = true;
 					suc3 = false;
@@ -183,8 +184,8 @@ public class Java_ASCII_Test {
 
 					System.out.println("程式似乎並未正常地被關閉...");
 
-					/*讀取設定檔中的所有紀錄*/
-					String allLastTime = File_Conf.readConfFile();
+					/*讀取紀錄檔中的所有紀錄*/
+					String allLastTime = File_Conf.readLogFile();
 					/*用換行拆分資料*/
 					String [] recordSpace = allLastTime.split("\n");
 					/*最後一筆為上次啟動時間*/
@@ -199,25 +200,25 @@ public class Java_ASCII_Test {
 					/*在原有紀錄中加入新的一筆*/
 					String allTime = allLastTime + "\n" + myTime;
 
-					/*將所有紀錄重新寫入設定檔*/
-					if(File_Conf.writeConfFile(allTime).equals("")){
+					/*將所有紀錄重新寫入紀錄檔*/
+					if(File_Conf.writeLogFile(allTime).equals("")){
 						suc1 = true;
 					}
 					else{
-						System.out.println(File_Conf.writeConfFile(allTime));
+						System.out.println(File_Conf.writeLogFile(allTime));
 					}
 
 					/*嘗試立即刪除暫存檔*/
 					if(!File_Conf.deleteTmpFileNow().equals("")){
 						System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc2 = false;
 					}
 
 					/*嘗試建立暫存檔*/
 					if(!File_Conf.createTmpFile().equals("")){
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else{
@@ -228,7 +229,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if(!File_Conf.deleteTmpFile().equals("")){
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc4 = false;
 					}
 
@@ -281,32 +282,32 @@ public class Java_ASCII_Test {
 					/*在原有紀錄中加入新的一筆*/
 					String allTime = lastTime + "\n" + myTime;
 
-					/*嘗試建立設定檔*/
-					if(!File_Conf.createConfFile().equals("")){
-						System.out.println("設定檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+					/*嘗試建立紀錄檔*/
+					if(!File_Conf.createLogFile().equals("")){
+						System.out.println("紀錄檔建立失敗...\n錯誤資訊為：");
+						System.out.println(File_Conf.createLogFile());
 					}
 					/*成功才執行寫入方法*/
 					else{
-						if(File_Conf.writeConfFile(allTime).equals("")){
+						if(File_Conf.writeLogFile(allTime).equals("")){
 							suc1 = true;
 						}
 						else{
-							System.out.println(File_Conf.writeConfFile(allTime));
+							System.out.println(File_Conf.writeLogFile(allTime));
 						}
 					}
 
 					/*嘗試立刻刪除暫存檔*/
 					if(!File_Conf.deleteTmpFileNow().equals("")){
 						System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc2 = false;
 					}
 
 					/*嘗試建立暫存檔*/
 					if(!File_Conf.createTmpFile().equals("")){
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else{
@@ -317,7 +318,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if(!File_Conf.deleteTmpFile().equals("")){
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc4 = false;
 					}
 
@@ -372,8 +373,8 @@ public class Java_ASCII_Test {
 			Scanner consoleScan = new Scanner(inputCon.reader());
 
 			while (true) {
-				/*初始狀態-設定檔及暫存檔均不存在*/
-				if (!File_Conf.checkConfFile() && !File_Conf.checkTmpFile()) {
+				/*初始狀態-紀錄檔及暫存檔均不存在*/
+				if (!File_Conf.checkLogFile() && !File_Conf.checkTmpFile()) {
 					/*紀錄啟動時的時間*/
 					myTime = Get_Date.getDateNow();
 
@@ -383,24 +384,24 @@ public class Java_ASCII_Test {
 					suc2 = false;
 					suc3 = true;
 
-					/*嘗試建立設定檔*/
-					if (!File_Conf.createConfFile().equals("")) {
-						System.out.println("設定檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+					/*嘗試建立紀錄檔*/
+					if (!File_Conf.createLogFile().equals("")) {
+						System.out.println("紀錄檔建立失敗...\n錯誤資訊為：");
+						System.out.println(File_Conf.createLogFile());
 					}
 					/*成功才執行寫入方法*/
 					else {
-						if (File_Conf.writeConfFile(myTime).equals("")) {
+						if (File_Conf.writeLogFile(myTime).equals("")) {
 							suc1 = true;
 						} else {
-							System.out.println(File_Conf.writeConfFile(myTime));
+							System.out.println(File_Conf.writeLogFile(myTime));
 						}
 					}
 
 					/*嘗試建立暫存檔*/
 					if (!File_Conf.createTmpFile().equals("")) {
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else {
@@ -411,7 +412,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if (!File_Conf.deleteTmpFile().equals("")) {
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc3 = false;
 					}
 
@@ -447,13 +448,13 @@ public class Java_ASCII_Test {
 					}
 				}
 				/*上次使用時按正常流程關閉*/
-				else if (File_Conf.checkConfFile() && !File_Conf.checkTmpFile()) {
+				else if (File_Conf.checkLogFile() && !File_Conf.checkTmpFile()) {
 					suc1 = false;
 					suc2 = false;
 					suc3 = true;
 
-					/*讀取設定檔中的所有紀錄*/
-					String allLastTime = File_Conf.readConfFile();
+					/*讀取紀錄檔中的所有紀錄*/
+					String allLastTime = File_Conf.readLogFile();
 					/*用換行拆分資料*/
 					String[] recordSpace = allLastTime.split("\n");
 					/*最後一筆為上次啟動時間*/
@@ -468,17 +469,17 @@ public class Java_ASCII_Test {
 					/*在原有紀錄中加入新的一筆*/
 					String allTime = allLastTime + "\n" + myTime;
 
-					/*將所有紀錄重新寫入設定檔*/
-					if (File_Conf.writeConfFile(allTime).equals("")) {
+					/*將所有紀錄重新寫入紀錄檔*/
+					if (File_Conf.writeLogFile(allTime).equals("")) {
 						suc1 = true;
 					} else {
-						System.out.println(File_Conf.writeConfFile(allTime));
+						System.out.println(File_Conf.writeLogFile(allTime));
 					}
 
 					/*嘗試建立暫存檔*/
 					if (!File_Conf.createTmpFile().equals("")) {
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else {
@@ -489,7 +490,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if (!File_Conf.deleteTmpFile().equals("")) {
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc3 = false;
 					}
 
@@ -523,7 +524,7 @@ public class Java_ASCII_Test {
 					}
 				}
 				/*上次使用時未依正常流程關閉*/
-				else if (File_Conf.checkConfFile() && File_Conf.checkTmpFile()) {
+				else if (File_Conf.checkLogFile() && File_Conf.checkTmpFile()) {
 					suc1 = false;
 					suc2 = true;
 					suc3 = false;
@@ -531,8 +532,8 @@ public class Java_ASCII_Test {
 
 					System.out.println("程式似乎並未正常地被關閉...");
 
-					/*讀取設定檔中的所有紀錄*/
-					String allLastTime = File_Conf.readConfFile();
+					/*讀取紀錄檔中的所有紀錄*/
+					String allLastTime = File_Conf.readLogFile();
 					/*用換行拆分資料*/
 					String[] recordSpace = allLastTime.split("\n");
 					/*最後一筆為上次啟動時間*/
@@ -547,24 +548,24 @@ public class Java_ASCII_Test {
 					/*在原有紀錄中加入新的一筆*/
 					String allTime = allLastTime + "\n" + myTime;
 
-					/*將所有紀錄重新寫入設定檔*/
-					if (File_Conf.writeConfFile(allTime).equals("")) {
+					/*將所有紀錄重新寫入紀錄檔*/
+					if (File_Conf.writeLogFile(allTime).equals("")) {
 						suc1 = true;
 					} else {
-						System.out.println(File_Conf.writeConfFile(allTime));
+						System.out.println(File_Conf.writeLogFile(allTime));
 					}
 
 					/*嘗試立即刪除暫存檔*/
 					if (!File_Conf.deleteTmpFileNow().equals("")) {
 						System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc2 = false;
 					}
 
 					/*嘗試建立暫存檔*/
 					if (!File_Conf.createTmpFile().equals("")) {
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else {
@@ -575,7 +576,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if (!File_Conf.deleteTmpFile().equals("")) {
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc4 = false;
 					}
 
@@ -626,31 +627,31 @@ public class Java_ASCII_Test {
 					/*在原有紀錄中加入新的一筆*/
 					String allTime = lastTime + "\n" + myTime;
 
-					/*嘗試建立設定檔*/
-					if (!File_Conf.createConfFile().equals("")) {
-						System.out.println("設定檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+					/*嘗試建立紀錄檔*/
+					if (!File_Conf.createLogFile().equals("")) {
+						System.out.println("紀錄檔建立失敗...\n錯誤資訊為：");
+						System.out.println(File_Conf.createLogFile());
 					}
 					/*成功才執行寫入方法*/
 					else {
-						if (File_Conf.writeConfFile(allTime).equals("")) {
+						if (File_Conf.writeLogFile(allTime).equals("")) {
 							suc1 = true;
 						} else {
-							System.out.println(File_Conf.writeConfFile(allTime));
+							System.out.println(File_Conf.writeLogFile(allTime));
 						}
 					}
 
 					/*嘗試立刻刪除暫存檔*/
 					if (!File_Conf.deleteTmpFileNow().equals("")) {
 						System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc2 = false;
 					}
 
 					/*嘗試建立暫存檔*/
 					if (!File_Conf.createTmpFile().equals("")) {
 						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
 					else {
@@ -661,7 +662,7 @@ public class Java_ASCII_Test {
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if (!File_Conf.deleteTmpFile().equals("")) {
 						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
-						System.out.println(File_Conf.createConfFile());
+						System.out.println(File_Conf.deleteTmpFile());
 						suc4 = false;
 					}
 

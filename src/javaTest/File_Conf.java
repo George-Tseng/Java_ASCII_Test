@@ -4,15 +4,16 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class File_Conf {
-    /*固定設定檔、暫存檔的路徑*/
-    private final static File confF = new File("recConf.csv");
-    private final static File tmpF = new File("recTmp.csv");
+    /*固定設定檔、暫存檔等的路徑*/
+    private final static File logF = new File("appLog.csv");
+    private final static File tmpF = new File("appTmp.csv");
+    //private final static File paraF = new File("appPara.csv");
 
     /*建立設定檔*/
-    protected static String createConfFile(){
+    protected static String createLogFile(){
         String status = "";
         try{
-            if(!confF.createNewFile()){
+            if(!logF.createNewFile()){
                 status = "建立失敗";
             }
         } catch(IOException IOE){
@@ -22,13 +23,13 @@ public class File_Conf {
     }
 
     /*寫入設定值*/
-    protected static String writeConfFile(String timeNow){
+    protected static String writeLogFile(String timeNow){
         FileOutputStream fos0;
         OutputStreamWriter osw0;
         String result = "";
 
         try{
-            fos0 = new FileOutputStream(confF);
+            fos0 = new FileOutputStream(logF);
             osw0 = new OutputStreamWriter(fos0, StandardCharsets.UTF_8);
 
             osw0.write(timeNow);
@@ -42,14 +43,14 @@ public class File_Conf {
     }
 
     /*讀取設定檔*/
-    protected static String readConfFile(){
+    protected static String readLogFile(){
         FileInputStream fis0;
         InputStreamReader isr0;
         int count;
         String result;
 
         try{
-            fis0 = new FileInputStream(confF);
+            fis0 = new FileInputStream(logF);
             isr0 = new InputStreamReader(fis0, StandardCharsets.UTF_8);
             StringBuilder sb0 = new StringBuilder();
 
@@ -151,8 +152,8 @@ public class File_Conf {
     }
 
     /*確認設定檔是否存在*/
-    protected static boolean checkConfFile(){
-        return confF.exists();
+    protected static boolean checkLogFile(){
+        return logF.exists();
     }
 
     /*確認暫存檔是否存在*/
