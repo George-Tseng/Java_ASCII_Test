@@ -47,7 +47,7 @@ public class File_Conf {
         FileInputStream fis0;
         InputStreamReader isr0;
         int count;
-        String result;
+        String result = "";
 
         try{
             fis0 = new FileInputStream(confF);
@@ -64,7 +64,6 @@ public class File_Conf {
             isr0.close();
         } catch(IOException IOE){
             System.out.println(IOE.getMessage());
-            result = "";
         }
         return result;
     }
