@@ -1,13 +1,11 @@
 package javaTest;
 
-import java.text.ParseException;
-
 public class Get_Key {
 
-    protected static String getEncodeKey(String inputTime, String inputMacAddress, String inputKey) throws ParseException {
+    protected static String getEncodeKey(String inputTime, String inputMacAddress, String inputKey){
         /*計時用*/
         String timeStart = Get_Date.getDateNow();
-        String timeEnd;
+        String timeEnd, result;
 
         /*用split拆裝String*/
         String [] timeSpace = inputTime.split(",");
@@ -28,45 +26,50 @@ public class Get_Key {
         StringBuilder sb0 = new StringBuilder();
 
         /*利用迴圈執行轉換*/
-        for(int i = 0; i < keySpace.length; i++){
+        for (int i = 0; i < keySpace.length; i++) {
             int paraInput = ASCII_Translator.getASCII(keySpace[i]);
             int paraT, paraM, paraTotal;
 
-            if(keySpace.length <= paraTime){
+            if (keySpace.length <= paraTime) {
                 paraT = Integer.parseInt(timeSpace[i + 1]);
-            }
-            else{
+            } else {
                 paraT = Integer.parseInt(timeSpace[i % paraTime + 1]);
             }
 
-            if(keySpace.length <= paraMacAddress){
+            if (keySpace.length <= paraMacAddress) {
                 paraM = Integer.parseInt(macAddressSpace[i + 1]);
-            }
-            else{
+            } else {
                 paraM = Integer.parseInt(macAddressSpace[i % paraMacAddress + 1]);
             }
 
             paraTotal = paraTime * paraT + paraMacAddress * paraM + paraInput;
             paraResult = paraTotal / 128;
-            paraRest = (byte)((paraTotal) % 128);
+            paraRest = (byte) ((paraTotal) % 128);
 
             sb0.append(paraResult);
             sb0.append(":");
             //sb0.append(ASCII_Translator.getChar(paraRest));
             sb0.append(paraRest);
-            if(i < keySpace.length - 1){
+            if (i < keySpace.length - 1) {
                 sb0.append(",");
             }
         }
         timeEnd = Get_Date.getDateNow();
-        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
+        String timeDiff = (!Get_Date.getTimeDifference(timeStart, timeEnd).equals("")) ? Get_Date.getTimeDifference(timeStart, timeEnd) :  "Fail";
+        System.out.println(timeDiff);
+        if(timeDiff.equals("Fail")){
+            result = "";
+        }
+        else{
+            result = sb0.toString();
+        }
 
-        return sb0.toString();
+        return result;
     }
-    protected static String getDecodeKey(String inputTime, String inputMacAddress, String inputText) throws ParseException {
+    protected static String getDecodeKey(String inputTime, String inputMacAddress, String inputText){
         /*計時用*/
         String timeStart = Get_Date.getDateNow();
-        String timeEnd;
+        String timeEnd, result;
 
         /*字串轉換*/
         String inputParaT = ASCII_Translator.getMessageASCII(inputTime);
@@ -119,15 +122,22 @@ public class Get_Key {
             sb0.append(ASCII_Translator.getChar(paraKey));
         }
         timeEnd = Get_Date.getDateNow();
-        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
+        String timeDiff = (!Get_Date.getTimeDifference(timeStart, timeEnd).equals("")) ? Get_Date.getTimeDifference(timeStart, timeEnd) :  "Fail";
+        System.out.println(timeDiff);
+        if(timeDiff.equals("Fail")){
+            result = "";
+        }
+        else{
+            result = sb0.toString();
+        }
 
-        return sb0.toString();
+        return result;
     }
 
-    protected static String getEncodeKeyMid(String inputTime, String inputMacAddress, String inputKey) throws ParseException {
+    protected static String getEncodeKeyMid(String inputTime, String inputMacAddress, String inputKey){
         /*計時用*/
         String timeStart = Get_Date.getDateNow();
-        String timeEnd;
+        String timeEnd, result;
 
         /*用split拆裝String*/
         String [] timeSpace = inputTime.split(",");
@@ -183,15 +193,22 @@ public class Get_Key {
             }
         }
         timeEnd = Get_Date.getDateNow();
-        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
+        String timeDiff = (!Get_Date.getTimeDifference(timeStart, timeEnd).equals("")) ? Get_Date.getTimeDifference(timeStart, timeEnd) :  "Fail";
+        System.out.println(timeDiff);
+        if(timeDiff.equals("Fail")){
+            result = "";
+        }
+        else{
+            result = sb0.toString();
+        }
 
-        return sb0.toString();
+        return result;
     }
 
-    protected static String getDecodeKeyMid(String inputTime, String inputMacAddress, String inputText) throws ParseException {
+    protected static String getDecodeKeyMid(String inputTime, String inputMacAddress, String inputText){
         /*計時用*/
         String timeStart = Get_Date.getDateNow();
-        String timeEnd;
+        String timeEnd, result;
 
         /*字串轉換*/
         String inputParaT = ASCII_Translator.getMessageASCII(inputTime);
@@ -251,15 +268,22 @@ public class Get_Key {
             }
         }
         timeEnd = Get_Date.getDateNow();
-        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
+        String timeDiff = (!Get_Date.getTimeDifference(timeStart, timeEnd).equals("")) ? Get_Date.getTimeDifference(timeStart, timeEnd) :  "Fail";
+        System.out.println(timeDiff);
+        if(timeDiff.equals("Fail")){
+            result = "";
+        }
+        else{
+            result = sb0.toString();
+        }
 
-        return sb0.toString();
+        return result;
     }
 
-    protected static String getEncodeKeyLong(String inputTime, String inputMacAddress, String inputKey) throws ParseException {
+    protected static String getEncodeKeyLong(String inputTime, String inputMacAddress, String inputKey){
         /*計時用*/
         String timeStart = Get_Date.getDateNow();
-        String timeEnd;
+        String timeEnd, result;
 
         /*用split拆裝String*/
         String [] timeSpace = inputTime.split(",");
@@ -327,14 +351,22 @@ public class Get_Key {
         }
 
         timeEnd = Get_Date.getDateNow();
-        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
-        return sb0.toString();
+        String timeDiff = (!Get_Date.getTimeDifference(timeStart, timeEnd).equals("")) ? Get_Date.getTimeDifference(timeStart, timeEnd) :  "Fail";
+        System.out.println(timeDiff);
+        if(timeDiff.equals("Fail")){
+            result = "";
+        }
+        else{
+            result = sb0.toString();
+        }
+
+        return result;
     }
 
-    protected static String getDecodeKeyLong(String inputTime, String inputMacAddress, String inputText) throws ParseException {
+    protected static String getDecodeKeyLong(String inputTime, String inputMacAddress, String inputText){
         /*計時用*/
         String timeStart = Get_Date.getDateNow();
-        String timeEnd;
+        String timeEnd, result;
 
         /*字串轉換*/
         String inputParaT = ASCII_Translator.getMessageASCII(inputTime);
@@ -404,7 +436,15 @@ public class Get_Key {
             }
         }
         timeEnd = Get_Date.getDateNow();
-        System.out.println(Get_Date.getTimeDifference(timeStart, timeEnd));
-        return sb0.toString();
+        String timeDiff = (!Get_Date.getTimeDifference(timeStart, timeEnd).equals("")) ? Get_Date.getTimeDifference(timeStart, timeEnd) :  "Fail";
+        System.out.println(timeDiff);
+        if(timeDiff.equals("Fail")){
+            result = "";
+        }
+        else{
+            result = sb0.toString();
+        }
+
+        return result;
     }
 }
