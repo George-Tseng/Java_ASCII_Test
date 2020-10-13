@@ -3,8 +3,10 @@ package javaTest;
 public class ASCII_Translator {
 
     /**
+     * 字元轉ASCII
      *
      * @param inputChar 輸入字元(char)
+     *
      * @return ASCII(int)
      */
     protected static int getASCII(char inputChar){
@@ -12,8 +14,10 @@ public class ASCII_Translator {
     }
 
     /**
+     * ASCII轉字元
      *
      * @param inputByte 輸入ASCII(int)
+     *
      * @return 字元(char)
      */
     public static char getChar(int inputByte){
@@ -21,9 +25,14 @@ public class ASCII_Translator {
     }
 
     /**
+     * 訊息由字元轉成ASCII
      *
      * @param inputParas 輸入資訊(String)
+     *
      * @return  轉換成ASCII後的資訊(String)
+     *
+     * @see StringBuilder
+     * @see String#toCharArray()
      */
     protected static String getMessageASCII(String inputParas){
         /*用toCharArray方法把匯入的String拆成Char陣列*/
@@ -49,9 +58,16 @@ public class ASCII_Translator {
     }
 
     /**
+     * 訊息由ASCII轉回到字元
      *
      * @param inputParas 輸入資訊(String)
+     *
      * @return 轉換回字元的資訊(String)
+     *
+     * @see String(char[])
+     * @see String#split(String)
+     * @see Integer#parseInt(String)
+     * @see Byte#parseByte(String)
      */
     protected static String getMessageChar(String inputParas){
         /*用split拆裝String*/

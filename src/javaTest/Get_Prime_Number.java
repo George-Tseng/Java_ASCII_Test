@@ -3,9 +3,15 @@ package javaTest;
 public class Get_Prime_Number {
 
     /**
+     * 獲得一個小等或等於輸入值的最大質數
      *
      * @param input 輸入的數值(int)
+     *
      * @return 小等等於輸入值的最大質數(int)
+     *
+     * @see Math#ceil(double)
+     * @see Math#sqrt(double)
+     * @see NumberFormatException
      */
     protected static int getMaxPrimeNumI(int input) {
         /*參數*/
