@@ -10,8 +10,12 @@ public class File_Conf {
     private final static File resultF = new File("appResult.txt");
 
     /**
+     * 建立設定檔
      *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see File#createNewFile()
+     * @see IOException
      */
     /*建立設定檔*/
     protected static String createConfFile(){
@@ -27,9 +31,16 @@ public class File_Conf {
     }
 
     /**
+     * 新建的同時寫入設定檔
      *
      * @param timeNow 較高強度加密後的啟動時間(String)
+     *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see IOException
      */
     /*寫入設定檔*/
     protected static String writeConfFile(String timeNow){
@@ -52,9 +63,16 @@ public class File_Conf {
     }
 
     /**
+     * 設定檔已存在的前提下額外添加內容
      *
      * @param timeNow 較高強度加密後的啟動時間(String)
+     *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see IOException
      */
     /*擴寫設定檔*/
     protected static String appendConfFile(String timeNow){
@@ -77,8 +95,15 @@ public class File_Conf {
     }
 
     /**
+     * 讀取設定檔
      *
      * @return 狀態值，正常執行時會回傳非空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see StringBuilder
+     * @see IOException
      */
     /*讀取設定檔*/
     protected static String readConfFile(){
@@ -107,8 +132,12 @@ public class File_Conf {
     }
 
     /**
+     * 建立暫存檔
      *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see File#createNewFile()
+     * @see IOException
      */
     /*建立暫存檔*/
     protected static String createTmpFile(){
@@ -124,9 +153,16 @@ public class File_Conf {
     }
 
     /**
+     * 寫入暫存檔
      *
      * @param timeNow 較高強度加密後的啟動時間(String)
+     *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see IOException
      */
     /*寫入暫存檔*/
     protected static String writeTmpFile(String timeNow){
@@ -149,8 +185,15 @@ public class File_Conf {
     }
 
     /**
+     * 讀取暫存檔
      *
      * @return 狀態值，正常執行時會回傳非空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see StringBuilder
+     * @see IOException
      */
     /*讀取暫存檔*/
     protected static String readTmpFile(){
@@ -179,8 +222,12 @@ public class File_Conf {
     }
 
     /**
+     * 程式結束時刪除暫存檔
      *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see File#deleteOnExit()
+     * @see SecurityException
      */
     /*程式結束時刪除暫存檔*/
     protected static String deleteTmpFile(){
@@ -194,8 +241,12 @@ public class File_Conf {
     }
 
     /**
+     * 立刻刪除暫存檔
      *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see File#delete()
+     * @see SecurityException
      */
     /*立刻刪除暫存檔*/
     protected static String deleteTmpFileNow(){
@@ -211,8 +262,12 @@ public class File_Conf {
     }
 
     /**
+     * 建立輸出檔
      *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see File#createNewFile()
+     * @see IOException
      */
     /*建立輸出檔*/
     protected static String createResultFile(){
@@ -228,9 +283,16 @@ public class File_Conf {
     }
 
     /**
+     * 寫入輸出檔
      *
      * @param timeNow 較高強度加密後的時間(String)
+     *
      * @return 狀態值，正常執行時會回傳空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see IOException
      */
     /*寫入輸出檔*/
     protected static String writeResultFile(String timeNow){
@@ -253,33 +315,15 @@ public class File_Conf {
     }
 
     /**
-     *
-     * @param timeNow 較高強度加密後的時間(String)
-     * @return 狀態值，正常執行時會回傳空字串(String)
-     */
-    /*擴寫輸出檔*/
-    protected static String appendResultFile(String timeNow){
-        FileOutputStream fos0;
-        OutputStreamWriter osw0;
-        String result = "";
-
-        try{
-            fos0 = new FileOutputStream(resultF);
-            osw0 = new OutputStreamWriter(fos0, StandardCharsets.UTF_8);
-
-            osw0.append(timeNow);
-            osw0.flush();
-            fos0.close();
-            osw0.close();
-        } catch(IOException IOE){
-            result = IOE.getMessage();
-        }
-        return result;
-    }
-
-    /**
+     * 讀取輸出檔
      *
      * @return 狀態值，正常執行時會回傳非空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see StringBuilder
+     * @see IOException
      */
     /*讀取輸出檔*/
     protected static String readResultFile(){
@@ -308,8 +352,11 @@ public class File_Conf {
     }
 
     /**
+     * 確認設定檔是否存在
      *
      * @return true代表設定檔案存在
+     *
+     * @see File#exists()
      */
     /*確認設定檔是否存在*/
     protected static boolean checkConfFile(){
@@ -317,8 +364,11 @@ public class File_Conf {
     }
 
     /**
+     * 確認暫存檔是否存在
      *
      * @return true代表暫存檔案存在
+     *
+     * @see File#exists()
      */
     /*確認暫存檔是否存在*/
     protected static boolean checkTmpFile(){
@@ -326,10 +376,13 @@ public class File_Conf {
     }
 
     /**
+     * 確認輸出檔是否存在
      *
      * @return true代表輸出檔案存在
+     *
+     * @see File#exists()
      */
-    /*確認結果檔是否存在*/
+    /*確認輸出檔是否存在*/
     protected static boolean checkResultFile() {
         return resultF.exists();
     }

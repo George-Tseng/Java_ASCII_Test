@@ -1053,6 +1053,10 @@ public class Java_ASCII_Test {
 	}
 
 	/**
+	 * 顯示加解密結果，依序為原始輸入值、方法一的加密結果、方法一的還原結果
+	 * 、方法二的加密結果、方法二的還原結果
+	 * 、方法三的加密結果、方法三的還原結果；
+	 * 顯示完結果後將結果寫入輸出檔案進行輸出。
 	 *
 	 * @param myTime 當下時間(String)
 	 * @param inputKey 使用者輸入的資訊(String)
@@ -1061,6 +1065,8 @@ public class Java_ASCII_Test {
 	 * @param decodeTime 解密後的時戳(String)
 	 * @param decodeMacAddress 解密後的網卡資訊(String)
 	 *
+	 * @see Get_Key
+	 * @see File_Conf
 	 */
 	/*顯示結果*/
 	private static void displayResult(String myTime, String inputKey, String encodeTime, String encodeMacAddress, String decodeTime, String decodeMacAddress){
