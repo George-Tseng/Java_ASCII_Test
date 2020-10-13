@@ -7,6 +7,10 @@ import java.net.UnknownHostException;
 
 public class Get_Mac_Address {
 
+    /**
+     *
+     * @return 網卡資訊(String)
+     */
     protected static String getMacAddress() {
 
         InetAddress myIP;

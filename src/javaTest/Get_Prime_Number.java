@@ -1,6 +1,12 @@
 package javaTest;
 
 public class Get_Prime_Number {
+
+    /**
+     *
+     * @param input 輸入的數值(int)
+     * @return 小等等於輸入值的最大質數(int)
+     */
     protected static int getMaxPrimeNumI(int input) {
         /*參數*/
         int inputNum, result = 0;

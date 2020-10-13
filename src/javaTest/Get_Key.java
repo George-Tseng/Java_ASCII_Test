@@ -2,6 +2,13 @@ package javaTest;
 
 public class Get_Key {
 
+    /**
+     *
+     * @param inputTime 簡易加密過的時戳(String)
+     * @param inputMacAddress  簡易加密過的網卡資訊(String)
+     * @param inputKey 使用者輸入的訊息(String)
+     * @return 加密後的資訊(String)
+     */
     protected static String getEncodeKey(String inputTime, String inputMacAddress, String inputKey){
         String result;
 
@@ -46,7 +53,6 @@ public class Get_Key {
 
             sb0.append(paraResult);
             sb0.append(":");
-            //sb0.append(ASCII_Translator.getChar(paraRest));
             sb0.append(paraRest);
             if (i < keySpace.length - 1) {
                 sb0.append(",");
@@ -55,6 +61,14 @@ public class Get_Key {
         result = sb0.toString();
         return result;
     }
+
+    /**
+     *
+     * @param inputTime 時戳(String)
+     * @param inputMacAddress 網卡資訊(String)
+     * @param inputText 先前加密後的資訊(String)
+     * @return 使用者輸入的原始訊息(String)
+     */
     protected static String getDecodeKey(String inputTime, String inputMacAddress, String inputText){
         String result;
 
@@ -74,7 +88,6 @@ public class Get_Key {
         /*反運算產物*/
         int paraResult, paraRest;
         byte paraKey;
-        //char paraText;
 
         /*生成StringBuilder物件*/
         StringBuilder sb0 = new StringBuilder();
@@ -101,8 +114,6 @@ public class Get_Key {
             }
 
             paraResult = Integer.parseInt(keySpace[0]);
-            //paraText = keySpace[1].charAt(0);
-            //paraRest = ASCII_Translator.getASCII(paraText);
             paraRest = Integer.parseInt(keySpace[1]);
 
             paraKey = (byte)((paraResult * 128 + paraRest) - (paraTime * paraT + paraMacAddress * paraM));
@@ -112,6 +123,13 @@ public class Get_Key {
         return result;
     }
 
+    /**
+     *
+     * @param inputTime 簡易加密過的時戳(String)
+     * @param inputMacAddress 簡易加密過的網卡資訊(String)
+     * @param inputKey 使用者輸入的訊息(String)
+     * @return 中等加密後的資訊(String)
+     */
     protected static String getEncodeKeyMid(String inputTime, String inputMacAddress, String inputKey){
         String result;
 
@@ -172,6 +190,13 @@ public class Get_Key {
         return result;
     }
 
+    /**
+     *
+     * @param inputTime 時戳(String)
+     * @param inputMacAddress 網卡資訊(String)
+     * @param inputText 先前中等加密後的資訊(String)
+     * @return 使用者輸入的原始訊息(String)
+     */
     protected static String getDecodeKeyMid(String inputTime, String inputMacAddress, String inputText){
         String result;
 
@@ -236,6 +261,13 @@ public class Get_Key {
         return result;
     }
 
+    /**
+     *
+     * @param inputTime 簡易加密過的時戳(String)
+     * @param inputMacAddress 簡易加密過的網卡資訊(String)
+     * @param inputKey 使用者輸入的訊息(String)
+     * @return 較高強度加密後的資訊(String)
+     */
     protected static String getEncodeKeyLong(String inputTime, String inputMacAddress, String inputKey){
         String result;
 
@@ -307,6 +339,13 @@ public class Get_Key {
         return result;
     }
 
+    /**
+     *
+     * @param inputTime 時戳(String)
+     * @param inputMacAddress 網卡資訊(String)
+     * @param inputText 先前較高強度加密後的資訊(String)
+     * @return 使用者輸入的原始訊息(String)
+     */
     protected static String getDecodeKeyLong(String inputTime, String inputMacAddress, String inputText){
         String result;
 

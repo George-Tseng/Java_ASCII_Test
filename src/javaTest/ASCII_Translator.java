@@ -2,14 +2,29 @@ package javaTest;
 
 public class ASCII_Translator {
 
+    /**
+     *
+     * @param inputChar 輸入字元(char)
+     * @return ASCII(int)
+     */
     protected static int getASCII(char inputChar){
         return inputChar;
     }
 
+    /**
+     *
+     * @param inputByte 輸入ASCII(int)
+     * @return 字元(char)
+     */
     public static char getChar(int inputByte){
         return (char)inputByte;
     }
 
+    /**
+     *
+     * @param inputParas 輸入資訊(String)
+     * @return  轉換成ASCII後的資訊(String)
+     */
     protected static String getMessageASCII(String inputParas){
         /*用toCharArray方法把匯入的String拆成Char陣列*/
         char [] parasSpace = inputParas.toCharArray();
@@ -33,6 +48,11 @@ public class ASCII_Translator {
         return sb0.toString();
     }
 
+    /**
+     *
+     * @param inputParas 輸入資訊(String)
+     * @return 轉換回字元的資訊(String)
+     */
     protected static String getMessageChar(String inputParas){
         /*用split拆裝String*/
         String [] parasSpace = inputParas.split(",");
