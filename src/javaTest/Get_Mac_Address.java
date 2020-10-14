@@ -8,8 +8,14 @@ import java.net.UnknownHostException;
 public class Get_Mac_Address {
 
     /**
+     * 先取得IP(本方法未利用)，再以IP取得網卡MacAddress
      *
      * @return 網卡資訊(String)
+     *
+     * @see InetAddress
+     * @see NetworkInterface
+     * @see UnknownHostException
+     * @see SocketException
      */
     protected static String getMacAddress() {
 

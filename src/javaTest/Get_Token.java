@@ -13,10 +13,17 @@ public class Get_Token {
     private static final int paraTime = 23;
 
     /**
+     * 將參數寫入輸出檔的最前端
      *
      * @param encodeTime 加密後的原始時戳(String)
      * @param encodeMacAddress 加密後的原始網卡資訊(String)
+     *
      * @return 正常運行時會傳回空字串(String)
+     *
+     * @see FileOutputStream
+     * @see OutputStreamWriter
+     * @see StandardCharsets
+     * @see IOException
      */
     /*將驗證用的資訊寫入輸出檔*/
     protected static String writeToken(String encodeTime, String encodeMacAddress){

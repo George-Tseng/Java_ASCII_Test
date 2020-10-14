@@ -3,11 +3,22 @@ package javaTest;
 public class Get_Key {
 
     /**
+     * 簡易加密流程：
+     * 時戳為T、時戳字串長度為pT，參數t為T * pT;
+     * MacAddress為M、字串長度為pM，，參數m為M * pM
+     * 將輸入的字元轉換為K(ASCII)。
+     * 運算：t + m + K，
+     * 運算結果 / 128 -> 得到 商 與 餘數，
+     * 每次輸入字元就轉換成 "商:餘數"，彼此以","隔開。
      *
      * @param inputTime 簡易加密過的時戳(String)
      * @param inputMacAddress  簡易加密過的網卡資訊(String)
      * @param inputKey 使用者輸入的訊息(String)
+     *
      * @return 加密後的資訊(String)
+     *
+     * @see String#toCharArray()
+     * @see Integer#parseInt(String)
      */
     protected static String getEncodeKey(String inputTime, String inputMacAddress, String inputKey){
         String result;
@@ -63,11 +74,21 @@ public class Get_Key {
     }
 
     /**
+     * getEncodeKey的解密流程：
+     * 時戳為T、時戳字串長度為pT，參數t為T * pT
+     * ;MacAddress為M、字串長度為pM，參數m為M * pM;
+     * 先透過拆解","，還原出單組資料(商:餘數)。
+     * 運算商 * 128 + 餘數 - t + m，
+     * 結果即為原始輸入的K，最後再轉換回char
      *
      * @param inputTime 時戳(String)
      * @param inputMacAddress 網卡資訊(String)
      * @param inputText 先前加密後的資訊(String)
+     *
      * @return 使用者輸入的原始訊息(String)
+     *
+     * @see String#split(String)
+     * @see Integer#parseInt(String)
      */
     protected static String getDecodeKey(String inputTime, String inputMacAddress, String inputText){
         String result;
@@ -124,11 +145,23 @@ public class Get_Key {
     }
 
     /**
+     * 中等加密流程：
+     * 時戳為T、時戳字串長度為pT，參數t為T * pT;
+     * MacAddress為M、字串長度為pM，，參數m為M * pM
+     * 將輸入的字元轉換為K(ASCII)。
+     * 運算 (t+k)/m + (t-k)/m + t/(m+k) + t/(m-k) + t/mk + tk/m，
+     * 得出 商 跟 餘數，產生"商:餘數轉換成16進位"，每項一樣彼此以","隔開
      *
      * @param inputTime 簡易加密過的時戳(String)
      * @param inputMacAddress 簡易加密過的網卡資訊(String)
      * @param inputKey 使用者輸入的訊息(String)
+     *
      * @return 中等加密後的資訊(String)
+     *
+     * @see String#toCharArray()
+     * @see Integer#parseInt(String)
+     * @see Math#pow(double, double)
+     * @see Long#toHexString(long)
      */
     protected static String getEncodeKeyMid(String inputTime, String inputMacAddress, String inputKey){
         String result;
@@ -191,11 +224,23 @@ public class Get_Key {
     }
 
     /**
+     * getEncodeKeyMid的解密流程：
+     * 時戳為T、時戳字串長度為pT，參數t為T * pT;
+     * MacAddress為M、字串長度為pM，，參數m為M * pM
+     * 先拆解","，再還原出單組資料(商:餘數)。
+     * 然後用迴圈帶入的方式求出K，再轉回char
      *
      * @param inputTime 時戳(String)
      * @param inputMacAddress 網卡資訊(String)
      * @param inputText 先前中等加密後的資訊(String)
+     *
      * @return 使用者輸入的原始訊息(String)
+     *
+     * @see String#split(String)
+     * @see Integer#parseInt(String)
+     * @see Long#parseLong(String)
+     * @see Long#valueOf(String, int)
+     * @see Math#pow(double, double)
      */
     protected static String getDecodeKeyMid(String inputTime, String inputMacAddress, String inputText){
         String result;
@@ -262,11 +307,25 @@ public class Get_Key {
     }
 
     /**
+     * 較高強度的加密流程：
+     * 時戳為T、時戳字串長度為pT，參數t為T * pT;
+     * MacAddress為M、字串長度為pM，，參數m為M * pM
+     * 將輸入的字元轉換為k(ASCII)。
+     * 再對k進行以下處理：新K(k') = 小於等於k的最大質數 * 10 + k與該質數的差值，
+     * 運算 (t+k')/m + (t-k')/m + t/(m+k') + t/(m-k') + t/mk' + tk'/m，
+     * 得出 商 跟 餘數，產生"商:餘數先加上商後再轉換成16進位"，每項一樣彼此以","隔開
      *
      * @param inputTime 簡易加密過的時戳(String)
      * @param inputMacAddress 簡易加密過的網卡資訊(String)
      * @param inputKey 使用者輸入的訊息(String)
+     *
      * @return 較高強度加密後的資訊(String)
+     *
+     * @see String#split(String)
+     * @see Integer#parseInt(String)
+     * @see Get_Prime_Number
+     * @see Math#pow(double, double)
+     * @see Long#toHexString(long)
      */
     protected static String getEncodeKeyLong(String inputTime, String inputMacAddress, String inputKey){
         String result;
@@ -340,11 +399,25 @@ public class Get_Key {
     }
 
     /**
+     * getEncodeKeyLong的解密流程：
+     * 時戳為T、時戳字串長度為pT，參數t為T * pT;
+     * MacAddress為M、字串長度為pM，，參數m為M * pM。
+     * 先拆解","，再還原出單組資料(商:餘數)，
+     * 對將以迴圈帶入的k進行以下處理：新K(k') = 小於等於k的最大質數 * 10 + k與該質數的差值，
+     * 使用迴圈重複帶入k'，將符合條件的k轉換回char
      *
      * @param inputTime 時戳(String)
      * @param inputMacAddress 網卡資訊(String)
      * @param inputText 先前較高強度加密後的資訊(String)
+     *
      * @return 使用者輸入的原始訊息(String)
+     *
+     * @see String#split(String)
+     * @see Integer#parseInt(String)
+     * @see Get_Prime_Number
+     * @see Long#parseLong(String) 
+     * @see Long#valueOf(String, int) 
+     * @see Math#pow(double, double) 
      */
     protected static String getDecodeKeyLong(String inputTime, String inputMacAddress, String inputText){
         String result;
