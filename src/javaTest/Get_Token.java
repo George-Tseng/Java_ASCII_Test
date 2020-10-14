@@ -10,7 +10,6 @@ public class Get_Token {
 
     private static final String CreateTokenKey = "aAaAaAaAaAaAaAaAaAaAaAa";
     private static final File resultF = new File("appResult.txt");
-    private static final int paraTime = 23;
 
     /**
      * 將參數寫入輸出檔的最前端
