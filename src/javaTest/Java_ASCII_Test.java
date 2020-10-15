@@ -31,7 +31,7 @@ public class Java_ASCII_Test {
 
 					/*嘗試建立設定檔*/
 					if(!File_Conf.createConfFile().equals("")){
-						System.out.println("設定檔建立失敗...\n錯誤資訊為：");
+						System.out.println("設定檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 						System.out.println(File_Conf.createConfFile());
 					}
 					/*成功才執行寫入方法*/
@@ -46,7 +46,7 @@ public class Java_ASCII_Test {
 
 					/*嘗試建立暫存檔*/
 					if(!File_Conf.createTmpFile().equals("")){
-						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+						System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -57,7 +57,7 @@ public class Java_ASCII_Test {
 
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if(!File_Conf.deleteTmpFile().equals("")){
-						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+						System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 						System.out.println(File_Conf.createConfFile());
 						suc3 = false;
 					}
@@ -77,14 +77,14 @@ public class Java_ASCII_Test {
 						/*網卡資訊存在才執行*/
 						if(!myMacAddress.equals("NotFound")){
 							/*嘗試寫入加密後的設定*/
-							timePara = encodeTime+"\n"+encodeMacAddress+"\n"+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
+							timePara = encodeTime+System.lineSeparator()+encodeMacAddress+System.lineSeparator()+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 							if(!File_Conf.writeConfFile(timePara).equals("")){
 								System.out.println("寫入設定時出現錯誤...，程式無法繼續執行");
 							}
 							else{
 								/*嘗試建立輸出檔*/
 								if(!File_Conf.createResultFile().equals("")){
-									System.out.println("輸出檔建立失敗...\n錯誤資訊為：");
+									System.out.println("輸出檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 									System.out.println(File_Conf.createResultFile());
 								}
 								/*成功才執行寫入方法*/
@@ -125,14 +125,14 @@ public class Java_ASCII_Test {
 
 					/*讀取設定檔中的所有紀錄*/
 					if(File_Conf.readConfFile().equals("")){
-						System.out.println("讀取設定檔失敗...\n錯誤訊息為：");
+						System.out.println("讀取設定檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
 						System.out.println(File_Conf.readConfFile());
 					}
 					/*成功*/
 					else{
 						String allLastTime = File_Conf.readConfFile();
 						/*用換行拆分資料*/
-						String [] recordSpace = allLastTime.split("\n");
+						String [] recordSpace = allLastTime.split(System.lineSeparator());
 						/*最後一筆為上次啟動時間*/
 						String lastTime = recordSpace[recordSpace.length - 1];
 
@@ -150,7 +150,7 @@ public class Java_ASCII_Test {
 						/*轉換成特殊格式*/
 						timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 						/*在原有紀錄中加入新的一筆*/
-						String allTime = allLastTime + "\n" + timePara;
+						String allTime = allLastTime + System.lineSeparator() + timePara;
 
 						/*將所有紀錄追加寫入設定檔*/
 						if(File_Conf.appendConfFile(allTime).equals("")){
@@ -162,7 +162,7 @@ public class Java_ASCII_Test {
 
 						/*嘗試建立暫存檔*/
 						if(!File_Conf.createTmpFile().equals("")){
-							System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.createTmpFile());
 						}
 						/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -173,7 +173,7 @@ public class Java_ASCII_Test {
 
 						/*設定JVM關閉後自動刪除暫存檔*/
 						if(!File_Conf.deleteTmpFile().equals("")){
-							System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.deleteTmpFile());
 							suc3 = false;
 						}
@@ -208,14 +208,14 @@ public class Java_ASCII_Test {
 
 					/*讀取設定檔中的所有紀錄*/
 					if(File_Conf.readConfFile().equals("")){
-						System.out.println("讀取設定檔失敗...\n錯誤訊息為：");
+						System.out.println("讀取設定檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
 						System.out.println(File_Conf.readConfFile());
 					}
 					/*成功*/
 					else{
 						String allLastTime = File_Conf.readConfFile();
 						/*用換行拆分資料*/
-						String [] recordSpace = allLastTime.split("\n");
+						String [] recordSpace = allLastTime.split(System.lineSeparator());
 						/*最後一筆為上次啟動時間*/
 						String lastTime = recordSpace[recordSpace.length - 1];
 
@@ -233,7 +233,7 @@ public class Java_ASCII_Test {
 						/*轉換成特殊格式*/
 						timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 						/*在原有紀錄中加入新的一筆*/
-						String allTime = allLastTime + "\n" + timePara;
+						String allTime = allLastTime + System.lineSeparator() + timePara;
 
 						/*將所有紀錄追加寫入設定檔*/
 						if(File_Conf.appendConfFile(allTime).equals("")){
@@ -245,14 +245,14 @@ public class Java_ASCII_Test {
 
 						/*嘗試立即刪除暫存檔*/
 						if(!File_Conf.deleteTmpFileNow().equals("")){
-							System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
+							System.out.println("上次執行時的暫存檔清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.deleteTmpFile());
 							suc2 = false;
 						}
 
 						/*嘗試建立暫存檔*/
 						if(!File_Conf.createTmpFile().equals("")){
-							System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.createTmpFile());
 						}
 						/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -263,7 +263,7 @@ public class Java_ASCII_Test {
 
 						/*設定JVM關閉後自動刪除暫存檔*/
 						if(!File_Conf.deleteTmpFile().equals("")){
-							System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.deleteTmpFile());
 							suc4 = false;
 						}
@@ -300,13 +300,13 @@ public class Java_ASCII_Test {
 					if(File_Conf.checkResultFile()){
 						/*讀取輸出檔*/
 						if(File_Conf.readResultFile().equals("")){
-							System.out.println("讀取輸出檔失敗...\n錯誤訊息為：");
+							System.out.println("讀取輸出檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
 							System.out.println(File_Conf.readResultFile());
 						}
 						/*成功*/
 						else{
 							String token = File_Conf.readResultFile();
-							String [] tokenSpace = token.split("\n");
+							String [] tokenSpace = token.split(System.lineSeparator());
 							String encodeTimeTmp = tokenSpace[0];
 							encodeMacAddress = tokenSpace[1];
 							String decodeTimeTmp = tokenSpace[3];
@@ -329,20 +329,20 @@ public class Java_ASCII_Test {
 								StringBuilder sb1 = new StringBuilder();
 								sb1.append(Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, decodeTime));
 								for(int j = 1; 8 * j + 2 < tokenSpace.length; j++){
-									sb1.append("\n");
+									sb1.append(System.lineSeparator());
 									sb1.append(Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, tokenSpace[8 * j + 2]));
 								}
 								String allOldTime = sb1.toString();
 								/*轉換成特殊格式*/
 								timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 								/*在原有紀錄中加入新的一筆以及部分參數*/
-								String allTime = encodeTime + "\n" + encodeMacAddress + "\n" + allOldTime + "\n" + timePara;
+								String allTime = encodeTime + System.lineSeparator() + encodeMacAddress + System.lineSeparator() + allOldTime + System.lineSeparator() + timePara;
 
 								decodeMacAddress = ASCII_Translator.getMessageChar(encodeMacAddress);
 
 								/*嘗試建立設定檔*/
 								if(!File_Conf.createConfFile().equals("")){
-									System.out.println("設定檔建立失敗...\n錯誤資訊為：");
+									System.out.println("設定檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 									System.out.println(File_Conf.createConfFile());
 								}
 								/*成功才執行寫入方法*/
@@ -358,7 +358,7 @@ public class Java_ASCII_Test {
 								/*嘗試立刻刪除暫存檔*/
 								if(File_Conf.checkTmpFile()){
 									if(!File_Conf.deleteTmpFileNow().equals("")){
-										System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
+										System.out.println("上次執行時的暫存檔清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 										System.out.println(File_Conf.deleteTmpFile());
 										suc2 = false;
 									}
@@ -366,7 +366,7 @@ public class Java_ASCII_Test {
 
 								/*嘗試建立暫存檔*/
 								if(!File_Conf.createTmpFile().equals("")){
-									System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+									System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 									System.out.println(File_Conf.createTmpFile());
 								}
 								/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -377,7 +377,7 @@ public class Java_ASCII_Test {
 
 								/*設定JVM關閉後自動刪除暫存檔*/
 								if(!File_Conf.deleteTmpFile().equals("")){
-									System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+									System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 									System.out.println(File_Conf.deleteTmpFile());
 									suc4 = false;
 								}
@@ -387,7 +387,7 @@ public class Java_ASCII_Test {
 									System.out.println("目前時間為："+myTime);
 
 									/*嘗試寫入加密後的設定*/
-									timePara = encodeTime+"\n"+encodeMacAddress+"\n"+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
+									timePara = encodeTime+System.lineSeparator()+encodeMacAddress+System.lineSeparator()+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 									if(!File_Conf.writeConfFile(timePara).equals("")){
 										System.out.println("寫入設定時出現錯誤...，程式無法繼續執行");
 									}
@@ -414,14 +414,14 @@ public class Java_ASCII_Test {
 					else{
 						/*讀取暫存檔的紀錄作為上次啟動時間*/
 						if(File_Conf.readTmpFile().equals("")){
-							System.out.println("讀取暫存檔失敗...\n錯誤訊息為：");
+							System.out.println("讀取暫存檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
 							System.out.println(File_Conf.readTmpFile());
 						}
 						/*成功*/
 						else{
 							String tmpLastTime = File_Conf.readTmpFile();
 							/*用換行拆分資料*/
-							String [] recordSpace = tmpLastTime.split("\n");
+							String [] recordSpace = tmpLastTime.split(System.lineSeparator());
 							/*最後一筆為上次啟動時間*/
 							String lastTime = recordSpace[recordSpace.length - 1];
 
@@ -439,11 +439,11 @@ public class Java_ASCII_Test {
 							/*轉換成特殊格式*/
 							timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 							/*在原有紀錄中加入新的一筆*/
-							String allTime = tmpLastTime + "\n" + timePara;
+							String allTime = tmpLastTime + System.lineSeparator() + timePara;
 
 							/*嘗試建立設定檔*/
 							if(!File_Conf.createConfFile().equals("")){
-								System.out.println("設定檔建立失敗...\n錯誤資訊為：");
+								System.out.println("設定檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.createConfFile());
 							}
 							/*成功才執行寫入方法*/
@@ -458,14 +458,14 @@ public class Java_ASCII_Test {
 
 							/*嘗試立刻刪除暫存檔*/
 							if(!File_Conf.deleteTmpFileNow().equals("")){
-								System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
+								System.out.println("上次執行時的暫存檔清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.deleteTmpFile());
 								suc2 = false;
 							}
 
 							/*嘗試建立暫存檔*/
 							if(!File_Conf.createTmpFile().equals("")){
-								System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+								System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.createTmpFile());
 							}
 							/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -476,7 +476,7 @@ public class Java_ASCII_Test {
 
 							/*設定JVM關閉後自動刪除暫存檔*/
 							if(!File_Conf.deleteTmpFile().equals("")){
-								System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+								System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.deleteTmpFile());
 								suc4 = false;
 							}
@@ -486,14 +486,14 @@ public class Java_ASCII_Test {
 								System.out.println("目前時間為："+myTime);
 
 								/*嘗試寫入加密後的設定*/
-								timePara = encodeTime+"\n"+encodeMacAddress+"\n"+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
+								timePara = encodeTime+System.lineSeparator()+encodeMacAddress+System.lineSeparator()+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 								if(!File_Conf.writeConfFile(timePara).equals("")){
 									System.out.println("寫入設定時出現錯誤...，程式無法繼續執行");
 								}
 								else{
 									/*嘗試建立輸出檔*/
 									if(!File_Conf.createResultFile().equals("")){
-										System.out.println("輸出檔建立失敗...\n錯誤資訊為：");
+										System.out.println("輸出檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 										System.out.println(File_Conf.createResultFile());
 									}
 									/*成功才執行寫入方法*/
@@ -525,7 +525,7 @@ public class Java_ASCII_Test {
 					}
 				}
 
-				System.out.print("\n如要結束程式，請輸入「Exit」:");
+				System.out.print(System.lineSeparator()+"如要結束程式，請輸入「Exit」:");
 				exitKey = inputScan.nextLine();
 				if(exitKey.toUpperCase().equals("EXIT")) {
 					System.out.println("程式已結束...");
@@ -557,7 +557,7 @@ public class Java_ASCII_Test {
 
 					/*嘗試建立設定檔*/
 					if (!File_Conf.createConfFile().equals("")) {
-						System.out.println("設定檔建立失敗...\n錯誤資訊為：");
+						System.out.println("設定檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 						System.out.println(File_Conf.createConfFile());
 					}
 					/*成功才執行寫入方法*/
@@ -571,7 +571,7 @@ public class Java_ASCII_Test {
 
 					/*嘗試建立暫存檔*/
 					if (!File_Conf.createTmpFile().equals("")) {
-						System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+						System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 						System.out.println(File_Conf.createTmpFile());
 					}
 					/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -582,7 +582,7 @@ public class Java_ASCII_Test {
 
 					/*設定JVM關閉後自動刪除暫存檔*/
 					if (!File_Conf.deleteTmpFile().equals("")) {
-						System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+						System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 						System.out.println(File_Conf.deleteTmpFile());
 						suc3 = false;
 					}
@@ -602,14 +602,14 @@ public class Java_ASCII_Test {
 						/*網卡資訊存在才執行*/
 						if (!myMacAddress.equals("NotFound")) {
 							/*嘗試寫入加密後的設定*/
-							timePara = encodeTime+"\n"+encodeMacAddress+"\n"+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
+							timePara = encodeTime+System.lineSeparator()+encodeMacAddress+System.lineSeparator()+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 							if(!File_Conf.writeConfFile(timePara).equals("")){
 								System.out.println("寫入設定時出現錯誤...，程式無法繼續執行");
 							}
 							else{
 								/*嘗試建立輸出檔*/
 								if(!File_Conf.createResultFile().equals("")){
-									System.out.println("輸出檔建立失敗...\n錯誤資訊為：");
+									System.out.println("輸出檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 									System.out.println(File_Conf.createResultFile());
 								}
 								/*成功才執行寫入方法*/
@@ -654,7 +654,7 @@ public class Java_ASCII_Test {
 					else{
 						String allLastTime = File_Conf.readConfFile();
 						/*用換行拆分資料*/
-						String[] recordSpace = allLastTime.split("\n");
+						String[] recordSpace = allLastTime.split(System.lineSeparator());
 						/*最後一筆為上次啟動時間*/
 						String lastTime = recordSpace[recordSpace.length - 1];
 
@@ -672,7 +672,7 @@ public class Java_ASCII_Test {
 						/*轉換成特殊格式*/
 						timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 						/*在原有紀錄中加入新的一筆*/
-						String allTime = allLastTime + "\n" + timePara;
+						String allTime = allLastTime + System.lineSeparator() + timePara;
 
 						/*將所有紀錄追加寫入設定檔*/
 						if (File_Conf.appendConfFile(allTime).equals("")) {
@@ -683,7 +683,7 @@ public class Java_ASCII_Test {
 
 						/*嘗試建立暫存檔*/
 						if (!File_Conf.createTmpFile().equals("")) {
-							System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.createTmpFile());
 						}
 						/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -694,7 +694,7 @@ public class Java_ASCII_Test {
 
 						/*設定JVM關閉後自動刪除暫存檔*/
 						if (!File_Conf.deleteTmpFile().equals("")) {
-							System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.deleteTmpFile());
 							suc3 = false;
 						}
@@ -733,7 +733,7 @@ public class Java_ASCII_Test {
 					else{
 						String allLastTime = File_Conf.readConfFile();
 						/*用換行拆分資料*/
-						String[] recordSpace = allLastTime.split("\n");
+						String[] recordSpace = allLastTime.split(System.lineSeparator());
 						/*最後一筆為上次啟動時間*/
 						String lastTime = recordSpace[recordSpace.length - 1];
 
@@ -751,7 +751,7 @@ public class Java_ASCII_Test {
 						/*轉換成特殊格式*/
 						timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 						/*在原有紀錄中加入新的一筆*/
-						String allTime = allLastTime + "\n" + timePara;
+						String allTime = allLastTime + System.lineSeparator() + timePara;
 
 						/*將所有紀錄追加寫入設定檔*/
 						if (File_Conf.appendConfFile(allTime).equals("")) {
@@ -762,14 +762,14 @@ public class Java_ASCII_Test {
 
 						/*嘗試立即刪除暫存檔*/
 						if (!File_Conf.deleteTmpFileNow().equals("")) {
-							System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
+							System.out.println("上次執行時的暫存檔清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.deleteTmpFile());
 							suc2 = false;
 						}
 
 						/*嘗試建立暫存檔*/
 						if (!File_Conf.createTmpFile().equals("")) {
-							System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.createTmpFile());
 						}
 						/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -780,7 +780,7 @@ public class Java_ASCII_Test {
 
 						/*設定JVM關閉後自動刪除暫存檔*/
 						if (!File_Conf.deleteTmpFile().equals("")) {
-							System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+							System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 							System.out.println(File_Conf.deleteTmpFile());
 							suc4 = false;
 						}
@@ -816,13 +816,13 @@ public class Java_ASCII_Test {
 					if(File_Conf.checkResultFile()){
 						/*讀取輸出檔*/
 						if(File_Conf.readResultFile().equals("")){
-							System.out.println("讀取輸出檔失敗...\n錯誤訊息為：");
+							System.out.println("讀取輸出檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
 							System.out.println(File_Conf.readResultFile());
 						}
 						/*成功*/
 						else{
 							String token = File_Conf.readResultFile();
-							String [] tokenSpace = token.split("\n");
+							String [] tokenSpace = token.split(System.lineSeparator());
 							String encodeTimeTmp = tokenSpace[0];
 							encodeMacAddress = tokenSpace[1];
 							String decodeTimeTmp = tokenSpace[3];
@@ -845,14 +845,14 @@ public class Java_ASCII_Test {
 								StringBuilder sb1 = new StringBuilder();
 								sb1.append(Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, decodeTime));
 								for(int j = 1; 8 * j + 2 < tokenSpace.length; j++){
-									sb1.append("\n");
+									sb1.append(System.lineSeparator());
 									sb1.append(Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, tokenSpace[8 * j + 2]));
 								}
 								String allOldTime = sb1.toString();
 								/*轉換成特殊格式*/
 								timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 								/*在原有紀錄中加入新的一筆以及部分參數*/
-								String allTime = encodeTime + "\n" + encodeMacAddress + "\n" + allOldTime + "\n" + timePara;
+								String allTime = encodeTime + System.lineSeparator() + encodeMacAddress + System.lineSeparator() + allOldTime + System.lineSeparator() + timePara;
 
 								decodeMacAddress = ASCII_Translator.getMessageChar(encodeMacAddress);
 
@@ -874,7 +874,7 @@ public class Java_ASCII_Test {
 								/*嘗試立刻刪除暫存檔*/
 								if(File_Conf.checkTmpFile()){
 									if(!File_Conf.deleteTmpFileNow().equals("")){
-										System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
+										System.out.println("上次執行時的暫存檔清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 										System.out.println(File_Conf.deleteTmpFile());
 										suc2 = false;
 									}
@@ -882,7 +882,7 @@ public class Java_ASCII_Test {
 
 								/*嘗試建立暫存檔*/
 								if(!File_Conf.createTmpFile().equals("")){
-									System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+									System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 									System.out.println(File_Conf.createTmpFile());
 								}
 								/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -893,7 +893,7 @@ public class Java_ASCII_Test {
 
 								/*設定JVM關閉後自動刪除暫存檔*/
 								if(!File_Conf.deleteTmpFile().equals("")){
-									System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+									System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 									System.out.println(File_Conf.deleteTmpFile());
 									suc4 = false;
 								}
@@ -903,7 +903,7 @@ public class Java_ASCII_Test {
 									System.out.println("目前時間為："+myTime);
 
 									/*嘗試寫入加密後的設定*/
-									timePara = encodeTime+"\n"+encodeMacAddress+"\n"+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
+									timePara = encodeTime+System.lineSeparator()+encodeMacAddress+System.lineSeparator()+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 									if(!File_Conf.writeConfFile(timePara).equals("")){
 										System.out.println("寫入設定時出現錯誤...，程式無法繼續執行");
 									}
@@ -936,7 +936,7 @@ public class Java_ASCII_Test {
 						else {
 							String tmpLastTime = File_Conf.readTmpFile();
 							/*用換行拆分資料*/
-							String[] recordSpace = tmpLastTime.split("\n");
+							String[] recordSpace = tmpLastTime.split(System.lineSeparator());
 							/*最後一筆為上次啟動時間*/
 							String lastTime = recordSpace[recordSpace.length - 1];
 
@@ -954,11 +954,11 @@ public class Java_ASCII_Test {
 							/*轉換成特殊格式*/
 							timePara = Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 							/*在原有紀錄中加入新的一筆*/
-							String allTime = tmpLastTime + "\n" + timePara;
+							String allTime = tmpLastTime + System.lineSeparator() + timePara;
 
 							/*嘗試建立設定檔*/
 							if (!File_Conf.createConfFile().equals("")) {
-								System.out.println("設定檔建立失敗...\n錯誤資訊為：");
+								System.out.println("設定檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.createConfFile());
 							}
 							/*成功才執行寫入方法*/
@@ -972,14 +972,14 @@ public class Java_ASCII_Test {
 
 							/*嘗試立刻刪除暫存檔*/
 							if (!File_Conf.deleteTmpFileNow().equals("")) {
-								System.out.println("上次執行時的暫存檔清除失敗...\n錯誤資訊為：");
+								System.out.println("上次執行時的暫存檔清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.deleteTmpFile());
 								suc2 = false;
 							}
 
 							/*嘗試建立暫存檔*/
 							if(!File_Conf.createTmpFile().equals("")){
-								System.out.println("暫存檔建立失敗...\n錯誤資訊為：");
+								System.out.println("暫存檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.createTmpFile());
 							}
 							/*成功才執行寫入方法，立即執行第一次，之後每過一秒執行一次*/
@@ -990,7 +990,7 @@ public class Java_ASCII_Test {
 
 							/*設定JVM關閉後自動刪除暫存檔*/
 							if (!File_Conf.deleteTmpFile().equals("")) {
-								System.out.println("暫存檔排定清除失敗...\n錯誤資訊為：");
+								System.out.println("暫存檔排定清除失敗..."+System.lineSeparator()+"錯誤資訊為：");
 								System.out.println(File_Conf.deleteTmpFile());
 								suc4 = false;
 							}
@@ -1000,14 +1000,14 @@ public class Java_ASCII_Test {
 								System.out.println("目前時間為：" + myTime);
 
 								/*嘗試寫入加密後的設定*/
-								timePara = encodeTime+"\n"+encodeMacAddress+"\n"+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
+								timePara = encodeTime+System.lineSeparator()+encodeMacAddress+System.lineSeparator()+Get_Key.getEncodeKeyLong(encodeTime, encodeMacAddress, myTime);
 								if(!File_Conf.writeConfFile(timePara).equals("")){
 									System.out.println("寫入設定時出現錯誤...，程式無法繼續執行");
 								}
 								else{
 									/*嘗試建立輸出檔*/
 									if(!File_Conf.createResultFile().equals("")){
-										System.out.println("輸出檔建立失敗...\n錯誤資訊為：");
+										System.out.println("輸出檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 										System.out.println(File_Conf.createResultFile());
 									}
 									/*成功才執行寫入方法*/
@@ -1038,7 +1038,7 @@ public class Java_ASCII_Test {
 					}
 				}
 
-				System.out.print("\n如要結束程式，請輸入「Exit」:");
+				System.out.print(System.lineSeparator()+"如要結束程式，請輸入「Exit」:");
 				exitKey = consoleScan.nextLine();
 				if (exitKey.toUpperCase().equals("EXIT")) {
 					System.out.println("程式已正常結束...");
@@ -1094,19 +1094,19 @@ public class Java_ASCII_Test {
 		String recoveryKeyLong = (!recoveryKeyLongTmp.equals("")) ? recoveryKeyLongTmp : "執行失敗";
 		System.out.println("方法三還原結果為：" + recoveryKeyLong);
 
-		String totalResult = myTime + "\n" + inputKey + "\n" + result + "\n" + recoveryKey + "\n" + resultMid + "\n" + recoveryKeyMid + "\n" + resultLong + "\n" + recoveryKeyLong;
+		String totalResult = myTime + System.lineSeparator() + inputKey + System.lineSeparator() + result + System.lineSeparator() + recoveryKey + System.lineSeparator() + resultMid + System.lineSeparator() + recoveryKeyMid + System.lineSeparator() + resultLong + System.lineSeparator() + recoveryKeyLong;
 
 		/*確認輸出檔是否存在*/
 		if(!File_Conf.checkResultFile()){
 			/*嘗試建立輸出檔*/
 			if(!File_Conf.createResultFile().equals("")){
-				System.out.println("輸出檔建立失敗...\n錯誤資訊為：");
+				System.out.println("輸出檔建立失敗..."+System.lineSeparator()+"錯誤資訊為：");
 				System.out.println(File_Conf.createResultFile());
 			}
 			else{
 				/*嘗試寫入輸出檔*/
 				if(!File_Conf.writeResultFile(totalResult).equals("")){
-					System.out.println("輸出檔寫入失敗...\n錯誤資訊為：");
+					System.out.println("輸出檔寫入失敗..."+System.lineSeparator()+"錯誤資訊為：");
 					System.out.println(File_Conf.writeResultFile(totalResult));
 				}
 				else{
@@ -1118,9 +1118,9 @@ public class Java_ASCII_Test {
 		else if(!File_Conf.readResultFile().equals("")){
 			/*嘗試寫入輸出檔*/
 			String oldResult = File_Conf.readResultFile();
-			String newResult = oldResult + "\n" + totalResult;
+			String newResult = oldResult + System.lineSeparator() + totalResult;
 			if(!File_Conf.writeResultFile(newResult).equals("")){
-				System.out.println("輸出檔寫入失敗...\n錯誤資訊為：");
+				System.out.println("輸出檔寫入失敗..."+System.lineSeparator()+"錯誤資訊為：");
 				System.out.println(File_Conf.writeResultFile(newResult));
 			}
 			else{

@@ -29,7 +29,7 @@ public class Get_Token {
         FileOutputStream fos0;
         OutputStreamWriter osw0;
         String result = "";
-        String tokenKey = encodeTime + "\n"+ encodeMacAddress + "\n" + Get_Key.getEncodeKey(encodeTime, encodeMacAddress, CreateTokenKey);
+        String tokenKey = encodeTime + System.lineSeparator() + encodeMacAddress + System.lineSeparator() + Get_Key.getEncodeKey(encodeTime, encodeMacAddress, CreateTokenKey);
         try{
             fos0 = new FileOutputStream(resultF);
             osw0 = new OutputStreamWriter(fos0, StandardCharsets.UTF_8);
