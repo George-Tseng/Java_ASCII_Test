@@ -41,7 +41,8 @@ public class Get_Mac_Address {
 
             /*多種catch條件可以寫在一起*/
         } catch (UnknownHostException | SocketException E) {
-        	return "";
+        	System.out.println("發生錯誤！訊息為："+System.lineSeparator()+E.toString());
+            return "";
         }
         /*用toString()方法讓StringBuilder轉回String*/
         return sb0.toString();

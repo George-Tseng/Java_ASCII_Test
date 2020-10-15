@@ -39,7 +39,7 @@ public class Get_Token {
             fos0.close();
             osw0.close();
         } catch(IOException IOE){
-            result = IOE.getMessage();
+            result = IOE.toString();
         }
         return result;
     }

@@ -45,6 +45,7 @@ public class Get_Prime_Number {
                 }
             }
         } catch(NumberFormatException NFE){
+            System.out.println("發生錯誤！訊息為："+System.lineSeparator()+NFE.toString());
             result = 0;
         }
         return result;

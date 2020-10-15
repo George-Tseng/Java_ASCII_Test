@@ -125,8 +125,7 @@ public class Java_ASCII_Test {
 
 					/*讀取設定檔中的所有紀錄*/
 					if(File_Conf.readConfFile().equals("")){
-						System.out.println("讀取設定檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
-						System.out.println(File_Conf.readConfFile());
+						System.out.println("讀取設定檔失敗...");
 					}
 					/*成功*/
 					else{
@@ -240,7 +239,7 @@ public class Java_ASCII_Test {
 							suc1 = true;
 						}
 						else{
-							System.out.println(File_Conf.appendConfFile(allTime));
+							System.out.println("發生錯誤！訊息為："+System.lineSeparator()+File_Conf.appendConfFile(allTime));
 						}
 
 						/*嘗試立即刪除暫存檔*/
@@ -414,8 +413,7 @@ public class Java_ASCII_Test {
 					else{
 						/*讀取暫存檔的紀錄作為上次啟動時間*/
 						if(File_Conf.readTmpFile().equals("")){
-							System.out.println("讀取暫存檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
-							System.out.println(File_Conf.readTmpFile());
+							System.out.println("讀取暫存檔失敗...");
 						}
 						/*成功*/
 						else{
@@ -678,7 +676,7 @@ public class Java_ASCII_Test {
 						if (File_Conf.appendConfFile(allTime).equals("")) {
 							suc1 = true;
 						} else {
-							System.out.println(File_Conf.appendConfFile(allTime));
+							System.out.println("發生錯誤！訊息為："+System.lineSeparator()+File_Conf.appendConfFile(allTime));
 						}
 
 						/*嘗試建立暫存檔*/
@@ -757,7 +755,7 @@ public class Java_ASCII_Test {
 						if (File_Conf.appendConfFile(allTime).equals("")) {
 							suc1 = true;
 						} else {
-							System.out.println(File_Conf.appendConfFile(allTime));
+							System.out.println("發生錯誤！訊息為："+System.lineSeparator()+File_Conf.appendConfFile(allTime));
 						}
 
 						/*嘗試立即刪除暫存檔*/
@@ -816,8 +814,7 @@ public class Java_ASCII_Test {
 					if(File_Conf.checkResultFile()){
 						/*讀取輸出檔*/
 						if(File_Conf.readResultFile().equals("")){
-							System.out.println("讀取輸出檔失敗..."+System.lineSeparator()+"錯誤訊息為：");
-							System.out.println(File_Conf.readResultFile());
+							System.out.println("讀取輸出檔失敗...");
 						}
 						/*成功*/
 						else{
@@ -867,7 +864,7 @@ public class Java_ASCII_Test {
 										suc1 = true;
 									}
 									else{
-										System.out.println(File_Conf.writeConfFile(allTime));
+										System.out.println("發生錯誤！訊息為："+System.lineSeparator()+File_Conf.writeConfFile(allTime));
 									}
 								}
 

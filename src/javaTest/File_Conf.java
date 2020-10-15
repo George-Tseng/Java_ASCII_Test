@@ -25,7 +25,7 @@ public class File_Conf {
                 status = "建立失敗";
             }
         } catch(IOException IOE){
-            status = IOE.getMessage();
+            status = IOE.toString();
         }
         return status;
     }
@@ -57,7 +57,7 @@ public class File_Conf {
             fos0.close();
             osw0.close();
         } catch(IOException IOE){
-            result = IOE.getMessage();
+            result = IOE.toString();
         }
         return result;
     }
@@ -89,7 +89,7 @@ public class File_Conf {
             fos0.close();
             osw0.close();
         } catch(IOException IOE){
-            result = IOE.getMessage();
+            result = IOE.toString();
         }
         return result;
     }
@@ -126,7 +126,7 @@ public class File_Conf {
             fis0.close();
             isr0.close();
         } catch(IOException IOE){
-            System.out.println(IOE.getMessage());
+            System.out.println(IOE.toString());
         }
         return result;
     }
@@ -147,7 +147,7 @@ public class File_Conf {
                 status = "建立失敗";
             }
         } catch(IOException IOE){
-            status = IOE.getMessage();
+            status = IOE.toString();
         }
         return status;
     }
@@ -179,7 +179,7 @@ public class File_Conf {
             fos0.close();
             osw0.close();
         } catch(IOException IOE){
-            result = IOE.getMessage();
+            result = IOE.toString();
         }
         return result;
     }
@@ -216,7 +216,7 @@ public class File_Conf {
             fis0.close();
             isr0.close();
         } catch(IOException IOE){
-            System.out.println(IOE.getMessage());
+            System.out.println(IOE.toString());
         }
         return result;
     }
@@ -235,7 +235,7 @@ public class File_Conf {
         try{
             tmpF.deleteOnExit();
         } catch(SecurityException SE){
-            status = SE.getMessage();
+            status = SE.toString();
         }
         return status;
     }
@@ -256,7 +256,7 @@ public class File_Conf {
                 status = "清除失敗";
             }
         } catch(SecurityException SE){
-            status = SE.getMessage();
+            status = SE.toString();
         }
         return status;
     }
@@ -277,7 +277,7 @@ public class File_Conf {
                 status = "建立失敗";
             }
         } catch(IOException IOE){
-            status = IOE.getMessage();
+            status = IOE.toString();
         }
         return status;
     }
@@ -309,7 +309,7 @@ public class File_Conf {
             fos0.close();
             osw0.close();
         } catch(IOException IOE){
-            result = IOE.getMessage();
+            result = IOE.toString();
         }
         return result;
     }
@@ -346,7 +346,7 @@ public class File_Conf {
             fis0.close();
             isr0.close();
         } catch(IOException IOE){
-            System.out.println(IOE.getMessage());
+            System.out.println(IOE.toString());
         }
         return result;
     }
